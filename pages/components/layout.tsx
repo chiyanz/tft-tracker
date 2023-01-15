@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../styles/Layout.module.scss"
 import Head from "next/head";
+import Link from "next/link";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -13,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </Head>
       <div className={styles.container}>
         <nav className={styles['nav-bar']}>
-          <li className={styles['nav-link']}>HOME</li>
+          <Link href="/" className={styles['nav-link']}>HOME</Link>
         </nav>
         <div className={styles.content}>
           {children}

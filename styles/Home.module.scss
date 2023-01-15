@@ -8,14 +8,10 @@
 }
 
 .region-select {
-  position: relative;
-  float: left;
-  // flex-grow: 1;
+  flex-grow: 1;
 }
 
 .name-input {
-  position: relative;
-  float: right;
   width: 50%;
   background-color: white;
   border: 1px solid #ccc;
@@ -24,6 +20,19 @@
   color: #333;
   padding: 8px 52px 8px 10px;
   transition: all 200ms ease;
+  flex-grow: 3;
+}
+
+.submit-btn {
+  background-color: #F3A944;
+  color: #123151;
+  font-weight: 700;
+  padding: 9px 8px 9px 8px;
+  border-top:    0.2px solid #123151;
+  border-right:  0.5px solid #123151; 
+  border-bottom: 0.5px solid #123151;
+  border-radius: 2px;
+  flex-grow: 1;
 }
 
 

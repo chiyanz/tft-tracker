@@ -16,20 +16,26 @@
   flex-shrink: 0;
   max-width: 70%;
   margin: auto;
+  padding-bottom: 15px;
 }
 
 
 // navigation bar styles
 .nav-link {
   margin-left: 20px;
-  margin-top: 0.5em;
-  list-style: none;
+  padding: 4px;
   font-size: 20px;
+  color: #F3A944;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .nav-bar {
+  position: absolute;
   width: 100vw;
   height: 44px;
-  background-color: #224878;
-  color: #C7DEF1;
+  background-color: #123151;
+  opacity: 0.8;
 }
