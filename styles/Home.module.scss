@@ -1,3 +1,30 @@
+.input-form {
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  justify-content: center;
+  margin: auto;
+  margin-top: 15%;
+}
+
+.region-select {
+  position: relative;
+  float: left;
+  // flex-grow: 1;
+}
+
+.name-input {
+  position: relative;
+  float: right;
+  width: 50%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: #333;
+  padding: 8px 52px 8px 10px;
+  transition: all 200ms ease;
+}
 
 
 /* Enable hover only on non-touch devices */

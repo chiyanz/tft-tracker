@@ -1,3 +1,5 @@
+
+
 .container {
   display: flex;
   flex-direction: column;
@@ -8,10 +10,26 @@
   flex: 1 0 auto;
 }
 
+
+// footer styles
 .footer { 
   flex-shrink: 0;
+  max-width: 70%;
+  margin: auto;
 }
 
+
+// navigation bar styles
 .nav-link {
+  margin-left: 20px;
+  margin-top: 0.5em;
   list-style: none;
+  font-size: 20px;
+}
+
+.nav-bar {
+  width: 100vw;
+  height: 44px;
+  background-color: #224878;
+  color: #C7DEF1;
 }
