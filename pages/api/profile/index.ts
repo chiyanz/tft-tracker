@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import {Summoner, GetSummoner, MatchHistory, GetMatchHistory } from "../../types/types" 
+import {Summoner, GetSummoner, MatchHistory, GetMatchHistory } from "../../../types/types" 
 type Data = {
   name: string
 }
@@ -29,8 +29,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  if(req.method === "GET") {
-
-  }
+  const summonerName = req.query.player
+  const region = req.query.region
   res.status(200).json({ name: 'John Doe' })
 }
