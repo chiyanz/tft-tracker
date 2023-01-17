@@ -1,11 +1,22 @@
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
-import { useRouter } from 'next/router'
+import { GetSummoner } from '../../types/types' 
+// import { useRouter } from 'next/router'
 
 
-export default function Player() {
-  const router = useRouter()
-  const name = router.query.name as string
-  const region = router.query.region as string
+export const getServerSideProps: GetServerSideProps = async ({query}) => {
+  const {name, region}= query as {name: string; region: string}
+  const data: GetSummoner = {name, region}
+  
+  return {
+    props: {
+      data
+    }
+  }
+}
+
+
+export default function Player({ data }: {data: GetSummoner}) {
+  const { name, region } = data
 
   return (
     <>

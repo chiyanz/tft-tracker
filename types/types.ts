@@ -8,9 +8,10 @@ export interface Summoner {
   summonerLevel: number;
 }
 
+
 export interface GetSummoner {
-  summonerName: string;
-  result: Summoner;
+  name: string;
+  region: string;
 }
 
 export interface MatchHistory {
