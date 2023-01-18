@@ -9,7 +9,7 @@ export interface Summoner {
 }
 
 
-export interface GetSummoner {
+export interface SummonerParams {
   name: string;
   region: string;
 }
@@ -18,7 +18,7 @@ export interface MatchHistory {
   matchHistory: string[];
 }
 
-export interface GetMatchHistory {
+export interface MatchHistoryParams {
   puuid: string;
   result: MatchHistory;
 }

@@ -1,11 +1,11 @@
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
-import { GetSummoner } from '../../types/types' 
+import { SummonerParams } from '../../../types/types' 
 // import { useRouter } from 'next/router'
 
-
+const endpoint = 'http://localhost:3000/api/profile'
 export const getServerSideProps: GetServerSideProps = async ({query}) => {
   const {name, region}= query as {name: string; region: string}
-  const data: GetSummoner = {name, region}
+  const data: SummonerParams = {name, region}
   
   return {
     props: {
@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
 }
 
 
-export default function Player({ data }: {data: GetSummoner}) {
+export default function Player({ data }: {data: SummonerParams}) {
   const { name, region } = data
 
   return (
