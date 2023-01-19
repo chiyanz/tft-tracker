@@ -1,12 +1,13 @@
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
-import { Summoner, SummonerParams } from '../../../types/types' 
+import { Summoner, SummonerParams, PlayerInfo, League } from '../../../types/types' 
+import { GetProfileIcon } from '../../../utils/methods'
+import styles from '../../../styles/Profile.module.scss'
 // import { useRouter } from 'next/router'
 
 const endpoint = 'http://localhost:3000/api/profile'
 
 export const getServerSideProps: GetServerSideProps = async ({query}) => {
   const {name, region}= query as {name: string; region: string}
-  console.log(`name provided: ${name}, region provided: ${region}`)
   const info: SummonerParams = {name, region}
   const response = await fetch(endpoint, {
     method: 'POST', 
@@ -30,12 +31,37 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
 }
 
 
-export default function Player({ data }: {data: Summoner}) {
-  const { name,  summonerLevel} = data
+export default function Player({ data }: {data: PlayerInfo}) {
+  const { name,  summonerLevel, profileIconId} = data.summoner
+  const ranked = data.league ?? null
+  const pfpLink = GetProfileIcon(profileIconId)
+
+  const rankInfo = function(ranked: League) {
+    // if player is unranked
+    if(!ranked) {
+      return (
+        <>
+        <p>Unranked</p>
+        </>
+      )
+    }
+    else {
+      return (
+        <p>{ranked.tier} {ranked.rank}</p>
+      )
+    }
+  }
 
   return (
     <>
-      <h1>Summoner Name: {name} Level: {summonerLevel}</h1>
+      <div className={styles['side-bar']}>
+        <img className={styles.pfp} src={pfpLink} alt='player profile icon'></img>
+        <h1>{name}</h1>
+        <h3>Level: {summonerLevel}</h3>
+        {rankInfo(ranked)}
+      </div>
+      <></>
+      
     </>
   )
 }

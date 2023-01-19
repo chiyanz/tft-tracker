@@ -40,6 +40,11 @@ export interface League {
   hotStreak:    boolean;
 }
 
+export interface PlayerInfo {
+  summoner: Summoner;
+  league: League;
+}
+
 
 // match info
 export interface MatchInfo {

@@ -26,6 +26,6 @@ export default async function handler(
    */
 
   const leagueRes = await GetLeague({name: sumRes.id, region})
-  console.log(GetProfileIcon(sumRes.profileIconId))
-  res.json(sumRes)
+  console.log(leagueRes)
+  res.json({summoner: sumRes, league: leagueRes})
 }

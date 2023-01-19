@@ -26,7 +26,6 @@ export const GetSummoner = async function(info: SummonerParams): Promise<Summone
   const reqStr = `https://${regionMap[region]}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${apiKey}`
   const res = await fetch(reqStr)
   const data = await res.json()
-  console.log(data)
   return data
 }
 
@@ -38,5 +37,6 @@ export const GetLeague = async function(info: SummonerParams): Promise<League> {
   const {name, region}= info as {name: string; region: string}
   const reqStr = `https://${regionMap[region]}.api.riotgames.com/tft/league/v1/entries/by-summoner/${name}?api_key=${apiKey}`
   const res = await fetch(reqStr)
-  return res.json()
+  const data = await res.json()
+  return data[0]
 }
