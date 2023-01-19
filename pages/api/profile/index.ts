@@ -12,8 +12,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const name = "CleMiroh"
-  const region = "NA"
+  const {name, region} = req.body as {name: string, region: string}
   const sumRes = await GetSummoner({name, region})
   /* 
     contains the following info:
@@ -28,5 +27,5 @@ export default async function handler(
 
   const leagueRes = await GetLeague({name: sumRes.id, region})
   console.log(GetProfileIcon(sumRes.profileIconId))
-  res.send(leagueRes)
+  res.send(sumRes)
 }

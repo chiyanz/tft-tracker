@@ -25,10 +25,6 @@ export const GetSummoner = async function(info: SummonerParams): Promise<Summone
   const {name, region}= info as {name: string; region: string}
   const reqStr = `https://${regionMap[region]}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${apiKey}`
   const res = await fetch(reqStr)
-  console.log("API key value is:",apiKey)
-  console.log("Region is: ", regionMap[region])
-  console.log("Name is:", name)
-  console.log("Req str is:", reqStr)
   return res.json()
 }
 
