@@ -1,3 +1,4 @@
+// summoner info
 export interface Summoner {
   id:            string;
   accountId:     string;
@@ -7,7 +8,6 @@ export interface Summoner {
   revisionDate:  number;
   summonerLevel: number;
 }
-
 
 export interface SummonerParams {
   name: string;
@@ -23,6 +23,25 @@ export interface MatchHistoryParams {
   result: MatchHistory;
 }
 
+// league interface and required info
+export interface League {
+  leagueId:     string;
+  queueType:    string;
+  tier:         string;
+  rank:         string;
+  summonerId:   string;
+  summonerName: string;
+  leaguePoints: number;
+  wins:         number;
+  losses:       number;
+  veteran:      boolean;
+  inactive:     boolean;
+  freshBlood:   boolean;
+  hotStreak:    boolean;
+}
+
+
+// match info
 export interface MatchInfo {
   metadata: Metadata;
   info:     Info;

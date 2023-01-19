@@ -1,4 +1,4 @@
-import { SummonerParams,  Summoner} from "../types/types"
+import { SummonerParams,  Summoner, League} from "../types/types"
 
 const apiKey = process.env.NEXT_PUBLIC_API_KEY
 const regionMap: any = {
@@ -29,5 +29,16 @@ export const GetSummoner = async function(info: SummonerParams): Promise<Summone
   console.log("Region is: ", regionMap[region])
   console.log("Name is:", name)
   console.log("Req str is:", reqStr)
+  return res.json()
+}
+
+export const GetProfileIcon = function(info: number): string {
+  return `https://ddragon.leagueoflegends.com/cdn/13.1.1/img/profileicon/${info}.png`
+}
+
+export const GetLeague = async function(info: SummonerParams): Promise<League> {
+  const {name, region}= info as {name: string; region: string}
+  const reqStr = `https://${regionMap[region]}.api.riotgames.com/tft/league/v1/entries/by-summoner/${name}?api_key=${apiKey}`
+  const res = await fetch(reqStr)
   return res.json()
 }
