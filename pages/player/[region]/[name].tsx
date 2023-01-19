@@ -6,12 +6,13 @@ const endpoint = 'http://localhost:3000/api/profile'
 
 export const getServerSideProps: GetServerSideProps = async ({query}) => {
   const {name, region}= query as {name: string; region: string}
+  console.log(`name provided: ${name}, region provided: ${region}`)
   const info: SummonerParams = {name, region}
   const response = await fetch(endpoint, {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
+    method: 'POST', 
+    mode: 'cors', 
+    cache: 'no-cache', 
+    credentials: 'same-origin', 
     headers: {
       'Content-Type': 'application/json'
       // 'Content-Type': 'application/x-www-form-urlencoded',

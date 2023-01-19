@@ -2,30 +2,32 @@ import { SummonerParams,  Summoner, League} from "../types/types"
 
 const apiKey = process.env.NEXT_PUBLIC_API_KEY
 const regionMap: any = {
-  NA: "na1",
-   BR: "br1",
-   EU: "europe",
-   EUNE: "euw1", 
-   EUW: "euw1",
-   JP: "jp1",
-   KR: "kr",
-   LAN: "la1",
-   LAS: "la2",
-   OCE: "oc1",
-   TR: "tr1",
-   RU: "ru",
-   PH: "ph2",
-   SG: "sg2",
-   TH: "th2",
-   TW: "tw2",
-   VN: "vn2",
+  na: "na1",
+   br: "br1",
+   eu: "europe",
+   eune: "euw1", 
+   euw: "euw1",
+   jp: "jp1",
+   kr: "kr",
+   lan: "la1",
+   las: "la2",
+   oce: "oc1",
+   tr: "tr1",
+   ru: "ru",
+   ph: "ph2",
+   sg: "sg2",
+   th: "th2",
+   tw: "tw2",
+   vn: "vn2",
 }
 
 export const GetSummoner = async function(info: SummonerParams): Promise<Summoner> {
-  const {name, region}= info as {name: string; region: string}
+  const {name, region} = info as {name: string; region: string}
   const reqStr = `https://${regionMap[region]}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${apiKey}`
   const res = await fetch(reqStr)
-  return res.json()
+  const data = await res.json()
+  console.log(data)
+  return data
 }
 
 export const GetProfileIcon = function(info: number): string {
