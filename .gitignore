@@ -36,4 +36,4 @@ yarn-error.log*
 next-env.d.ts
 
 # TFT image database
-/TFT_Assets
+assets/*

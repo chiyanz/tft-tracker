@@ -2,9 +2,18 @@ import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
 import { Summoner, SummonerParams, PlayerInfo, League } from '../../../types/types' 
 import { GetProfileIcon } from '../../../utils/methods'
 import styles from '../../../styles/Profile.module.scss'
-// import { useRouter } from 'next/router'
 
+
+// import { useRouter } from 'next/router'
 const endpoint = 'http://localhost:3000/api/profile'
+const importAll = function(r: __WebpackModuleApi.RequireContext) {
+  let images: {[key: string]: string} = {}
+  r.keys().forEach((item, index) => { images[item.replace('./', '')] = r(item) });
+	return images
+} 
+	
+ const rankedImages = importAll(require.context('../../../assets/ranked-emblems', false, /\.(png|jpe?g|svg)$/))
+ const tftImages = importAll(require.context('../../../assets/TFT_Assets', false, /\.(png|jpe?g|svg)$/))
 
 export const getServerSideProps: GetServerSideProps = async ({query}) => {
   const {name, region}= query as {name: string; region: string}
