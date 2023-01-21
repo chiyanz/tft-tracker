@@ -14,8 +14,12 @@ export interface SummonerParams {
   region: string;
 }
 
-export interface MatchHistory {
+export interface MatchHistoryIds {
   matchHistory: string[];
+}
+
+export interface MatchHistory {
+  matchHistory: MatchInfo[];
 }
 
 export interface MatchHistoryParams {

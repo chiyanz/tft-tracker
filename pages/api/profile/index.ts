@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import {Summoner, SummonerParams, MatchHistory, MatchHistoryParams } from "../../../types/types" 
-import { GetLeague, GetProfileIcon, GetSummoner } from '../../../utils/methods'
+import { GetLeague, GetMatchHistory, GetProfileIcon, GetSummoner } from '../../../utils/methods'
 type Data = {
   name: string
 }
@@ -26,6 +26,8 @@ export default async function handler(
    */
 
   const leagueRes = await GetLeague({name: sumRes.id, region})
-  console.log(leagueRes)
+
+  const matchHistory = await GetMatchHistory(region, sumRes.puuid)
+  console.log(matchHistory)
   res.json({summoner: sumRes, league: leagueRes})
 }
