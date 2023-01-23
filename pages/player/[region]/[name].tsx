@@ -19,7 +19,8 @@ const importAll = function(r: __WebpackModuleApi.RequireContext) {
 //  const tftImages = importAll(require.context('../../../assets/TFT_Assets', false, /\.(png|jpe?g|svg)$/))
 
 export const getServerSideProps: GetServerSideProps = async ({query}) => {
-  const {name, region}= query as {name: string; region: string}
+  let {name, region}= query as {name: string; region: string}
+  name = name.toLowerCase()
   const info: SummonerParams = {name, region}
   const response = await fetch(endpoint, {
     method: 'POST', 
@@ -46,8 +47,9 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
 export default function Player({ data }: {data: PlayerInfo}) {
   const { name,  summonerLevel, profileIconId} = data.summoner
   const ranked = data.league ?? null
+  const placementHistory = data.placements
+  console.log(placementHistory)
   const pfpLink = GetProfileIcon(profileIconId)
-  console.log()
 
   const rankInfo = function(ranked: League) {
     // if player is unranked
@@ -64,10 +66,13 @@ export default function Player({ data }: {data: PlayerInfo}) {
           <p>{ranked.tier} {ranked.rank}</p>
           <img src={rankedImages[`${ranked.tier}.png`].default.src} alt={`${ranked.tier} emblem`} height={80} width={80}/>
         </>
-        
       )
     }
   }
+
+  const placementsDisplay = placementHistory.map((place) => {
+          return <div>{place}</div>
+    })
 
   return (
     <>
@@ -76,9 +81,13 @@ export default function Player({ data }: {data: PlayerInfo}) {
         <h1>{name}</h1>
         <h3>Level: {summonerLevel}</h3>
         {rankInfo(ranked)}
-
       </div>
-      <></>
+      <div className={styles.stats}>
+        {placementHistory && 
+        <div>
+          {placementsDisplay}
+        </div>}
+      </div>
       
     </>
   )

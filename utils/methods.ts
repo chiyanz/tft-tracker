@@ -1,4 +1,4 @@
-import { SummonerParams,  Summoner, League, MatchHistory, MatchHistoryIds} from "../types/types"
+import { SummonerParams,  Summoner, League, MatchHistory, MatchHistoryIds, MatchInfo} from "../types/types"
 
 const apiKey = process.env.NEXT_PUBLIC_API_KEY
 const platformMap: any = {
@@ -61,8 +61,15 @@ export const GetLeague = async function(info: SummonerParams): Promise<League> {
   return data[0]
 }
 
-export const GetMatchHistory = async function(region: string, puuid: string, count: number = 20): Promise<MatchHistoryIds>{
+export const GetMatchHistoryIds = async function(region: string, puuid: string, count: number = 10): Promise<MatchHistoryIds>{
   const reqStr = `https://${regionMap[region]}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=${count}&api_key=${apiKey}`
+  const res = await fetch(reqStr)
+  const data = await res.json()
+  return data
+}
+
+export const GetMatchHistory = async function(region: string, match_id: string): Promise<MatchInfo> {
+  const reqStr = `https://${regionMap[region]}.api.riotgames.com/tft/match/v1/matches/${match_id}?api_key=${apiKey}`
   const res = await fetch(reqStr)
   const data = await res.json()
   return data

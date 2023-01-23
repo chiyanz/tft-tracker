@@ -14,13 +14,9 @@ export interface SummonerParams {
   region: string;
 }
 
-export interface MatchHistoryIds {
-  matchHistory: string[];
-}
+export type MatchHistoryIds = string[]
 
-export interface MatchHistory {
-  matchHistory: MatchInfo[];
-}
+export type MatchHistory = MatchInfo[]
 
 export interface MatchHistoryParams {
   puuid: string;
@@ -47,6 +43,7 @@ export interface League {
 export interface PlayerInfo {
   summoner: Summoner;
   league: League;
+  placements: number[];
 }
 
 

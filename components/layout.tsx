@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <title>TFT Tracker</title>
         <meta name="description" content="TFT player stat tracker using Next.js" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico"/>
       </Head>
       <div className={styles.container}>
         <nav className={styles['nav-bar']}>

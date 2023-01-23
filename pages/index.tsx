@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.scss'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import {useState, MouseEvent} from 'react'
+import {useRouter} from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 const regions: string[] = ['NA', "EU", "EUNE", "EUW", "JP", "KR", "LAN", "LAS", "OCE", "TR", "RU", "PH", "SG", "TH"
@@ -12,12 +13,14 @@ const regions: string[] = ['NA', "EU", "EUNE", "EUW", "JP", "KR", "LAN", "LAS", 
 
 
 export default function Home() {
-  const [region, setRegion] = useState("")
+  const router = useRouter()
+  const [region, setRegion] = useState("NA")
   const [summonerName, setSummonerName] = useState("")
 
   const onSubmit = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault()
     console.log(`submitted with region:${region} and summoner name ${summonerName}`)
+    router.push(`player/${region.toLowerCase()}/${summonerName}`)
   }
 
   return (
