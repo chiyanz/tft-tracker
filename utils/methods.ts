@@ -43,7 +43,7 @@ const regionMap: any = {
 
 export const GetSummoner = async function(info: SummonerParams): Promise<Summoner> {
   const {name, region} = info as {name: string; region: string}
-  const reqStr = `https://${platformMap[region]}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${name}?api_key=${apiKey}`
+  const reqStr = `https://${platformMap[region]}.api.riotgames.com/tft/summoner/v1/summoners/by-name/${name}?api_key=${apiKey}`
   const res = await fetch(reqStr)
   const data = await res.json()
   return data
@@ -61,7 +61,7 @@ export const GetLeague = async function(info: SummonerParams): Promise<League> {
   return data[0]
 }
 
-export const GetMatchHistoryIds = async function(region: string, puuid: string, count: number = 10): Promise<MatchHistoryIds>{
+export const GetMatchHistoryIds = async function(region: string, puuid: string, count: number = 20): Promise<MatchHistoryIds>{
   const reqStr = `https://${regionMap[region]}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=${count}&api_key=${apiKey}`
   const res = await fetch(reqStr)
   const data = await res.json()

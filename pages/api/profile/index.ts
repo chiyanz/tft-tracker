@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import {Summoner, SummonerParams, MatchHistory, MatchHistoryParams, MatchHistoryIds, MatchInfo, Participant } from "../../../types/types" 
 import { GetLeague, GetMatchHistoryIds, GetMatchHistory, GetProfileIcon, GetSummoner } from '../../../utils/methods'
 
-
+const delay = (ms : number) => new Promise(res => setTimeout(res, ms));
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,6 +23,7 @@ export default async function handler(
   const leagueRes = await GetLeague({name: sumRes.id, region})
   const recentMatchIds = await GetMatchHistoryIds(region, sumRes.puuid)
   const matchPromises = recentMatchIds.map(async (matchId) => {
+    await delay(1000)
     return GetMatchHistory(region, matchId)
   })
   const recentMatches : MatchHistory = await Promise.all(matchPromises)
@@ -45,5 +46,24 @@ export default async function handler(
     })
   })
 
-  res.json({summoner: sumRes, league: leagueRes, placements: placeHistory})
+  let avg = 0, top4 = 0, won = 0
+  for(const place of placeHistory) {
+    avg += place
+    if(place <= 4) {
+      top4 += 1
+      if(place === 1) {
+        won += 1
+      }
+    }
+  }
+  // calculate stats from past 20 games
+  const pastStats = {
+    avg: avg / placeHistory.length,
+    top4,
+    won,
+  }
+
+
+
+  res.json({summoner: sumRes, league: leagueRes, placements: placeHistory, stats: pastStats})
 }

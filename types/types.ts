@@ -40,10 +40,18 @@ export interface League {
   hotStreak:    boolean;
 }
 
+export interface MatchStats {
+  avg: number;
+  top4: number;
+  won: number;
+  // lp: number;
+}
+
 export interface PlayerInfo {
   summoner: Summoner;
   league: League;
   placements: number[];
+  stats: MatchStats;
 }
 
 
