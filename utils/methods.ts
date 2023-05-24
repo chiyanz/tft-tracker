@@ -43,7 +43,9 @@ const regionMap: any = {
 
 export const GetSummoner = async function(info: SummonerParams): Promise<Summoner> {
   const {name, region} = info as {name: string; region: string}
-  const reqStr = `https://${platformMap[region]}.api.riotgames.com/tft/summoner/v1/summoners/by-name/${name}?api_key=${apiKey}`
+  console.log(name, region);
+  const reqStr = `https://${platformMap[region]}.api.riotgames.com/tft/summoner/v1/summoners/by-name/${name}?api_key=${apiKey}`;
+  console.log(reqStr);
   const res = await fetch(reqStr)
   const data = await res.json()
   return data

@@ -10,6 +10,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const {name, region} = req.body as {name: string, region: string}
+  console.log(`Received info: ${name}, ${region}`);
   const sumRes = await GetSummoner({name, region})  /* 
     contains the following info:
     id:            string;
