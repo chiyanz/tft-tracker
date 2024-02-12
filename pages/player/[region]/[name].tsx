@@ -5,7 +5,7 @@ import styles from '../../../styles/Profile.module.scss'
 import { convertToObject } from 'typescript'
 
 // import { useRouter } from 'next/router'
-const endpoint = "http://localhost:3000/api/profile";
+const endpoint = "http://127.0.0.1:3000/api/profile";
 const importAll = function (r: __WebpackModuleApi.RequireContext) {
   let images: { [key: string]: any } = {};
   r.keys().forEach((item, index) => {
@@ -24,17 +24,19 @@ const rankedImages = importAll(
 //  const tftImages = importAll(require.context('../../../assets/TFT_Assets', false, /\.(png|jpe?g|svg)$/))
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  console.log(query);
   let { name, region } = query as { name: string; region: string };
   name = name.toLowerCase();
   const info: SummonerParams = { name, region };
+  console.log("received info:", info);
+  console.log("calling api for summoner data:");
   const response = await fetch(endpoint, {
     method: "POST",
-    mode: "cors",
+    mode: "same-origin",
     cache: "no-cache",
     credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     redirect: "follow", // manual, *follow, error
     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url

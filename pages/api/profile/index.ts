@@ -9,9 +9,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const {name, region} = req.body as {name: string, region: string}
+  console.log(req.body);
+  const { name, region } = req.body as { name: string; region: string };
   console.log(`Received info: ${name}, ${region}`);
-  const sumRes = await GetSummoner({name, region})  /* 
+  const sumRes = await GetSummoner({ name, region });
+  /* 
     contains the following info:
     id:            string;
     accountId:     string;
@@ -21,8 +23,9 @@ export default async function handler(
     revisionDate:  number;
     summonerLevel: number;
    */
-  const leagueRes = await GetLeague({name: sumRes.id, region})
-  const recentMatchIds = await GetMatchHistoryIds(region, sumRes.puuid)
+  const leagueRes = await GetLeague({ name: sumRes.id, region });
+  const recentMatchIds = await GetMatchHistoryIds(region, sumRes.puuid);
+  console.log("matchids:", recentMatchIds);
   const matchPromises = recentMatchIds.map(async (matchId) => {
     await delay(1000)
     return GetMatchHistory(region, matchId)

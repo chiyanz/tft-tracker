@@ -41,38 +41,50 @@ const regionMap: any = {
    vn: "sea",
 }
 
-export const GetSummoner = async function(info: SummonerParams): Promise<Summoner> {
-  const {name, region} = info as {name: string; region: string}
+export const GetSummoner = async function (
+  info: SummonerParams
+): Promise<Summoner> {
+  const { name, region } = info as { name: string; region: string };
   console.log(name, region);
   const reqStr = `https://${platformMap[region]}.api.riotgames.com/tft/summoner/v1/summoners/by-name/${name}?api_key=${apiKey}`;
   console.log(reqStr);
-  const res = await fetch(reqStr)
-  const data = await res.json()
-  return data
-}
+  const res = await fetch(reqStr);
+  const data = await res.json();
+  return data;
+};
 
-export const GetProfileIcon = function(info: number): string {
-  return `https://ddragon.leagueoflegends.com/cdn/13.1.1/img/profileicon/${info}.png`
-}
+export const GetProfileIcon = function (info: number): string {
+  return `https://ddragon.leagueoflegends.com/cdn/13.1.1/img/profileicon/${info}.png`;
+};
 
-export const GetLeague = async function(info: SummonerParams): Promise<League> {
-  const {name, region}= info as {name: string; region: string}
-  const reqStr = `https://${platformMap[region]}.api.riotgames.com/tft/league/v1/entries/by-summoner/${name}?api_key=${apiKey}`
-  const res = await fetch(reqStr)
-  const data = await res.json()
-  return data[0]
-}
+export const GetLeague = async function (
+  info: SummonerParams
+): Promise<League> {
+  const { name, region } = info as { name: string; region: string };
+  const reqStr = `https://${platformMap[region]}.api.riotgames.com/tft/league/v1/entries/by-summoner/${name}?api_key=${apiKey}`;
+  const res = await fetch(reqStr);
+  const data = await res.json();
+  return data[0];
+};
 
-export const GetMatchHistoryIds = async function(region: string, puuid: string, count: number = 20): Promise<MatchHistoryIds>{
-  const reqStr = `https://${regionMap[region]}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=${count}&api_key=${apiKey}`
-  const res = await fetch(reqStr)
-  const data = await res.json()
-  return data
-}
+export const GetMatchHistoryIds = async function (
+  region: string,
+  puuid: string,
+  count: number = 20
+): Promise<MatchHistoryIds> {
+  const reqStr = `https://${regionMap[region]}.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=${count}&api_key=${apiKey}`;
+  console.log("collecting match ids:", reqStr);
+  const res = await fetch(reqStr);
+  const data = await res.json();
+  return data;
+};
 
-export const GetMatchHistory = async function(region: string, match_id: string): Promise<MatchInfo> {
-  const reqStr = `https://${regionMap[region]}.api.riotgames.com/tft/match/v1/matches/${match_id}?api_key=${apiKey}`
-  const res = await fetch(reqStr)
-  const data = await res.json()
-  return data
-}
+export const GetMatchHistory = async function (
+  region: string,
+  match_id: string
+): Promise<MatchInfo> {
+  const reqStr = `https://${regionMap[region]}.api.riotgames.com/tft/match/v1/matches/${match_id}?api_key=${apiKey}`;
+  const res = await fetch(reqStr);
+  const data = await res.json();
+  return data;
+};
